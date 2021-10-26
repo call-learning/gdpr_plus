@@ -1,0 +1,120 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_gprd_plus/guestconsent
+
+    Template for the guest consent message (see tool policy)
+
+    Context variables required for this template:
+    * pluginbaseurl
+    * returnurl - urlencoded URL to return to
+    * haspolicies - true if there are guest policies; false otherwise
+    * policies - array of policy documents
+
+    Example context (json):
+    {
+        "pluginbaseurl": "https://example.com",
+        "returnurl": "/",
+        "haspolicies": true,
+        "policies": [
+            {
+                "id": 1,
+                "name": "Terms &amp; conditions"
+            }
+        ]
+    }
+}}
+<div class="cc-container cc-noselect" id="cc-container-{{uniqid}}">
+    <div class="cc-box">
+        <div class="cc-title">
+            {{title}}
+        </div>
+        <div class="cc-section-landing">
+            <div class="cc-description cc-content">
+                {{# str }} guestconsentmessage, tool_policy {{/ str }}
+                <ul>
+                    {{#policies}}
+                        <li>
+                            <a href="{{pluginbaseurl}}/view.php?versionid={{id}}{{#returnurl}}&amp;returnurl={{.}}{{/returnurl}}"
+                            data-action="view-guest"
+                            data-versionid="{{id}}"
+                            data-behalfid="1" > {{{name}}} </a>
+                        </li>
+                    {{/policies}}
+                </ul>
+            </div>
+            <div class="cc-buttons">
+                <div class="cc-btn cc-btn-settings cc-btn-show-settings">>
+                    {{# str }} guestconsent:button:showsettings, theme_clboost {{/ str }}
+                </div>
+                <div class="cc-btn cc-btn-reject">
+                    {{# str }} guestconsent:button:reject, theme_clboost {{/ str }}
+                </div>
+                <div class="cc-btn cc-btn-accept cc-btn-accept-all">
+                    {{# str }} guestconsent:button:acceptall, theme_clboost {{/ str }}
+                </div>
+            </div>
+        </div>
+        <div class="cc-section-settings cc-hidden">
+            <div class="cc-content">
+                <div class="cc-categories cc-checkboxes">
+                        <!-- Category checkboxes go here -->
+                            <span data-category="essentials" role="checkbox" tabindex="0" aria-checked="true" aria-disabled="true"></span>
+                            <span data-category="essentials" role="link" tabindex="0">Essential</span>
+                </div>
+                <div class="cc-category-description">
+                    <span data-category="essentials" >
+                        Essential cookies are necessary for features which
+                    are essential to your use of our site or services,
+                    such as account login, authentication, and site security.
+                    </span>
+                    <span data-category="analytics" >
+                        EAnalytics cookies allow us to analyze your visits and
+                    actions on our websites, and offer you a more relevant
+                    experience.
+                    </span>
+                    <!-- Category description go here -->
+                </div>
+            </div>
+            <div class="cc-buttons">
+                <div class="cc-btn cc-btn-settings cc-btn-hide-settings">
+                    {{# str }} guestconsent:button:hidesettings, theme_clboost {{/ str }}
+                </div>
+                <div class="cc-btn cc-btn-reject">
+                    {{# str }} guestconsent:button:reject, theme_clboost {{/ str }}
+                </div>
+                <div class="cc-btn cc-btn-accept cc-btn-accept-selected">
+                    {{# str }} guestconsent:button:acceptselected, theme_clboost {{/ str }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#haspolicies}}
+    {{#js}}
+        require(['local_gprd_plus/guestconsent', 'tool_policy/policyactions'], function(CookieConsent, Actions) {
+        // Get localised messages.
+        var continuemessage = "{{# str }} guestconsent:continue, tool_policy {{/ str }}";
+        // Do not display in all H5P or other embedded iframes.
+        if (window.location === window.parent.location) {
+            const cc = new CookieConsent({
+                    containerId: "cc-container-{{uniqid}}",
+                });
+        }
+        });
+    {{/js}}
+{{/haspolicies}}
