@@ -17,15 +17,15 @@
 /**
  * Local plugin settings
  *
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_gprd_plus';
-$plugin->version = 2021102601;
+$plugin->component = 'tool_gdpr_plus';
+$plugin->version = 2021102603;
 $plugin->release = 'v0.1';
 $plugin->requires = 2019111800;
 $plugin->maturity = MATURITY_STABLE;

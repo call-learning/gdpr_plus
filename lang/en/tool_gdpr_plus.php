@@ -15,13 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Local GPRD policy plus
+ * Local gdpr policy plus
  *
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
 defined('MOODLE_INTERNAL') || die();
-$string['pluginname'] = 'GPRD Policies plus';
+$string['pluginname'] = 'GDPR Policies plus';
+$string['policiesconsent:label'] = 'If you want to continue browsing this website, you need to agree to some of our policies.';
+$string['policiesconsent:optionalagreement'] = 'Optional';
+$string['policiesconsent:mandatoryagreement'] = 'Mandatory';
+$string['policiesconsent:button:continue'] = 'Continue';
+$string['policiesconsent:button:showsettings'] = 'Show settings';
+$string['policiesconsent:button:rejectnonessential'] = 'Reject Non Essential';
+$string['policiesconsent:button:acceptall'] = 'Accept All';
+$string['policiesconsent:button:hidesettings'] = 'Hide settings';
+$string['policiesconsent:button:acceptselected'] = 'Save my choices';
+$string['policiesconsent:button:showbanner'] = 'Show Policies';

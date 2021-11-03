@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_gprd_plus\output;
+namespace tool_gdpr_plus\output;
 
 use plugin_renderer_base;
 
@@ -23,7 +23,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Main renderer
  *
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

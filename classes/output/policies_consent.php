@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_gprd_plus\output;
+namespace tool_gdpr_plus\output;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -23,17 +23,18 @@ use renderable;
 use renderer_base;
 use stdClass;
 use templatable;
+use tool_gdpr_plus\utils;
 use tool_policy\api;
 use tool_policy\policy_version;
 
 /**
  * Renderer for the policies plugin.
  *
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class guestconsent implements renderable, templatable {
+class policies_consent implements renderable, templatable {
 
     /**
      * Export the page data for the mustache template.
@@ -57,11 +58,26 @@ class guestconsent implements renderable, templatable {
             }
         }
         $data->returnurl = urlencode($data->returnurl);
-
-        $policies = api::list_current_versions(policy_version::AUDIENCE_GUESTS);
-        $data->policies = array_values($policies);
+        $policytype = policy_version::AUDIENCE_GUESTS;
+        if (isloggedin() && !isguestuser()) {
+            $policytype = policy_version::AUDIENCE_ALL;
+        }
+        $policies = api::list_current_versions($policytype);
         $data->haspolicies = !empty($policies);
-
+        $policies = utils::retrieve_policies_with_acceptance($policies);
+        $data->policyagreed = utils::has_policy_been_agreed();
+        $data->mandatorypolicies = [];
+        $data->optionalpolicies = [];
+        foreach ($policies as $policy) {
+            $policy->shortname =  preg_replace('/\s+/', '-', strtolower($policy->name));
+            if ($policy->mandatory) {
+                $data->mandatorypolicies[] = $policy;
+            } else {
+                $data->optionalpolicies[] = $policy;
+            }
+        }
+        $data->hasmandatorypolicies = !empty($data->mandatorypolicies);
+        $data->hasoptionalpolicies = !empty($data->optionalpolicies);
         return $data;
     }
 }

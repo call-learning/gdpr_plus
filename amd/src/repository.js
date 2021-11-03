@@ -14,32 +14,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Cookie consent policy
+ * Policies consent
  *
  * Derived from https://github.com/klaxit/cookie-consent
  * version 0.3.4
  *
- * @module    local_gprd_plus/cookie
- * @class     Cookie
- * @package   local_gprd_plus
+ * @module    tool_gdpr_plus/src/repository
+ * @class     PoliciesConsentManager
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-export default {
-    cookie: {
-        // Name of the cookie storing the consent state
-        name: "cookie_consent",
 
-        // If null, will take `location.hostname` by default
-        domain: null,
+import {call as fetchMany} from 'core/ajax';
 
-        // Duration of the consent
-        expiryDays: 365,
-
-        // If true, the cookies will only be allowed over https
-        secure: false,
-
-        // See https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-        sameSite: "Lax",
-    }
+/**
+ * Fetch the list of recordings from the server.
+ *
+ * @param   {Array} policiesAcceptance The instance ID
+ * @returns {Promise}
+ */
+export const acceptPolicies = (policiesAcceptance) => {
+    const args = {
+        'policies': policiesAcceptance
+    };
+    return fetchMany([{methodname: 'tool_gdpr_plus_accept_policies', args}])[0];
 };

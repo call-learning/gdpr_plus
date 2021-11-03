@@ -1,3 +1,4 @@
+<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -14,23 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Cookie consent policy
+ * GDPR Plus tool policy
  *
- * Derived from https://github.com/klaxit/cookie-consent
- * version 0.3.4
- *
- * @module    local_gprd_plus/cookie
- * @class     Cookie
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-export default class Observable {
-    on(eventname, callback) {
-        document.addEventListener(eventname, callback);
-    }
-    emit(eventname, ...args) {
-        const event = new Event(eventname);
-        document.dispatchEvent(event, args);
-    }
-}
+
+defined('MOODLE_INTERNAL') || die;
+
+$functions = [
+    'tool_gdpr_plus_accept_policies' => [
+        'classname'     => 'tool_gdpr_plus\external\accept_policies',
+        'methodname'    => 'execute',
+        'classpath'     => '',
+        'description'   => 'Accept or reject a set of policies',
+        'type'          => 'write',
+        'capabilities'  => '',
+        'ajax'          => true,
+        'loginrequired' => false,
+    ],
+];

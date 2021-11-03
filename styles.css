@@ -1,145 +1,19 @@
-/* UTILS */
-
-.cc-hidden {
-    display: none;
-}
-
-.cc-noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently
-                                     supported by Chrome, Edge, Opera and Firefox */
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* CONTENT */
-
-.cc-container {
+.tool_gdpr_plus.policies-consent .policy-container {
     position: fixed;
+    left: 0;
+    width: 100%;
     right: 0;
     bottom: 0;
-
     z-index: 9998;
-    flex-wrap: nowrap;
     height: auto;
     opacity: 0;
-    display: none;
-
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.cc-container.displayed {
+.tool_gdpr_plus.policies-consent .policy-container.displayed {
     opacity: 1;
-    display: flex;
-    animation: fadein 2s;
-}
-.cc-box {
-    display: block;
-    margin: 16px;
-    width: 520px;
-    box-shadow: 0px 4px 16px 0 rgba(0, 0, 0, .16);
-    padding: 16px;
-    background-color: #fff;
+    transition: opacity 0.5s ease-in-out;
+    visibility: visible;
 }
 
-.cc-title {
-    font-size: 1.8em;
-    font-weight: 400;
-    padding: 16px 0 4px 0;
-}
-
-.cc-content {
-    padding: 16px 0;
-    min-height: 60px;
-}
-
-.cc-buttons {
-    float: right;
-    margin-top: 16px;
-}
-
-.cc-btn {
-    display: inline-block;
-    padding: 10px 12px;
-    margin-left: 12px;
-    line-height: 1em;
-    cursor: pointer;
-
-    -webkit-transition: all .25s ease-in-out;
-    -moz-transition: all .25s ease-in-out;
-    transition: all .25s ease-in-out;
-}
-
-
-.cc-categories {
-    float: left;
-    width: 25%;
-    font-size: 1.1em;
-}
-.cc-categories div[role="checkbox"] {
-    width: 100%;
-    margin-top: 4px;
-    margin-left: 8px;
-}
-
-.cc-categories span[role="link"] {
-    outline: none;
-    padding-bottom: 0.1em;
-}
-
-.cc-category-description {
-    float: right;
-    width: 75%;
-}
-
-/*
-* This document includes material copied from or derived from
-* https://www.w3.org/TR/wai-aria-practices/examples/checkbox/css/checkbox.css
-* Copyright © 2015 W3C® (MIT, ERCIM, Keio, Beihang).
-*
-*/
-
-.cc-container [role="checkbox"] {
-    display: inline-block;
-    position: relative;
-    padding-left: 1.4em;
-    cursor: pointer;
-}
-
-[role="checkbox"]::before,
-[role="checkbox"]::after {
-    position: absolute;
-    top: 50%;
-    left: 7px;
-    transform: translate(-50%, -50%);
-    content: '';
-}
-
-[role="checkbox"]::before {
-    width: 14px;
-    height: 14px;
-}
-
-[role="checkbox"][aria-checked="mixed"]:active::after,
-[role="checkbox"][aria-checked="true"]::after {
-    display: block;
-    width: 0.25em;
-    height: 0.4em;
-    border: solid #fff;
-    border-width: 0 0.2em 0.2em 0;
-    transform: translateY(-65%) translateX(-50%) rotate(45deg);
-}
-
-[role="checkbox"]:focus {
-    outline: none;
-}

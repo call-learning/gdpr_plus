@@ -17,7 +17,7 @@
 /**
  * Local plugin settings
  *
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // Do nothing if we are not set as the site policies handler.
-if (empty($CFG->sitepolicyhandler) || $CFG->sitepolicyhandler !== 'local_gprd_plus') {
+if (empty($CFG->sitepolicyhandler) || $CFG->sitepolicyhandler !== 'tool_gdpr_plus') {
     return;
 }
 

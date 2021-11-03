@@ -14,17 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace local_gprd_plus\privacy\local\sitepolicy;
+namespace tool_gdpr_plus\privacy\local\sitepolicy;
 
 defined('MOODLE_INTERNAL') || die();
 
+use tool_gdpr_plus\external\accept_policies;
+use tool_gdpr_plus\utils;
 use tool_policy\api;
 use tool_policy\policy_version;
 
 /**
  * Class implementation for a site policy handler.
  *
- * @package   local_gprd_plus
+ * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -82,7 +84,7 @@ class handler extends \core_privacy\local\sitepolicy\handler {
 
         if (isguestuser()) {
             // For guests, agreement is stored in the session only.
-            $USER->policyagreed = 1;
+            $USER->policyagreed = utils::has_policy_been_agreed();
             return true;
         }
 
