@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace tool_gdpr_plus\external;
+
 use external_api;
 
 defined('MOODLE_INTERNAL') || die();
@@ -31,6 +32,11 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  */
 class accept_policies_test extends \externallib_advanced_testcase {
 
+    /**
+     * Setup test
+     *
+     * @return void
+     */
     public function setUp() {
         parent::setUp();
         $this->resetAfterTest();
@@ -44,70 +50,62 @@ class accept_policies_test extends \externallib_advanced_testcase {
      * @return mixed
      */
     protected function accept_policies(...$params) {
-        $acceptpolicies = accept_policies::execute(...$params);
+        $acceptpolicies = accept_policies::execute(... $params);
         return external_api::clean_returnvalue(accept_policies::execute_returns(), $acceptpolicies);
     }
 
-    /**
-     * Test execute API CALL with no instance
+    /***
+     * Accept no policies
+     *
+     * @return void
      */
-    public function test_execute_no_instance() {
-        $acceptpolicies = $this->accept_policies([]);
-
-        $this->assertIsArray($acceptpolicies);
-        $this->assertArrayHasKey('warnings', $acceptpolicies);
+    public function test_accept_nopolicies() {
+        $result = $this->accept_policies([]);
+        $this->assertNotEmpty($result);
+        $this->assertEmpty($result['warnings']);
     }
 
     /**
-     * Test execute API CALL without login
+     * Accept wrong parameters
+     *
+     * @return void
      */
-    public function test_execute_without_login() {
-        $this->resetAfterTest();
-
-        $course = $this->getDataGenerator()->create_course();
-        $record = $this->getDataGenerator()->create_module('bigbluebuttonbn', ['course' => $course->id]);
-        $instance = instance::get_from_instanceid($record->id);
-
-        $this->expectException(moodle_exception::class);
-        $this->can_join($instance->get_cm_id());
+    public function test_accept_wrong_parameters() {
+        $this->expectException('invalid_parameter_exception');
+        $this->accept_policies(['policies' => ['policyid' => 9999]]);
     }
 
     /**
-     * Test execute API CALL with invalid login
+     * Accept non existing policy
+     *
+     * @return void
      */
-    public function test_execute_with_invalid_login() {
-        $this->resetAfterTest();
-
-        $generator = $this->getDataGenerator();
-        $course = $generator->create_course();
-        $record = $generator->create_module('bigbluebuttonbn', ['course' => $course->id]);
-        $instance = instance::get_from_instanceid($record->id);
-
-        $user = $generator->create_user();
-        $this->setUser($user);
-
-        $this->expectException(moodle_exception::class);
-        $this->can_join($instance->get_cm_id());
+    public function test_accept_non_existing() {
+        $result = $this->accept_policies(['policies' => ['policyid' => 9999, 'accepted' => true]]);
+        $this->assertNotEmpty($result);
+        $this->assertNotEmpty($result['warnings']);
+        $this->assertEquals([
+            'item' => 'policyid',
+            'itemid' => 9999,
+            'warningcode' => 'invalidpolicyid',
+            'message' => 'Invalid policy id',
+        ], $result['warnings'][0]);
     }
 
     /**
-     * When login as a student
+     * Accept non existing policy
+     *
+     * @return void
      */
-    public function test_execute_with_valid_login() {
-        $this->resetAfterTest();
-
-        $generator = $this->getDataGenerator();
-        $course = $generator->create_course();
-        $record = $generator->create_module('bigbluebuttonbn', ['course' => $course->id]);
-        $instance = instance::get_from_instanceid($record->id);
-
-        $user = $generator->create_and_enrol($course, 'student');
-        $this->setUser($user);
-
-        $canjoin = $this->can_join($instance->get_cm_id());
-
-        $this->assertIsArray($canjoin);
-        $this->assertArrayHasKey('can_join', $canjoin);
-        $this->assertEquals(true, $canjoin['can_join']);
+    public function test_accept_non_logged_in() {
+        $result = $this->accept_policies(['policies' => ['policyid' => 9999, 'accepted' => true]]);
+        $this->assertNotEmpty($result);
+        $this->assertNotEmpty($result['warnings']);
+        $this->assertEquals([
+            'item' => 'policyid',
+            'itemid' => 9999,
+            'warningcode' => 'invalidpolicyid',
+            'message' => 'Invalid policy id',
+        ], $result['warnings'][0]);
     }
 }

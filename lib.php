@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @return string The HTML code to insert before the head.
  */
 function tool_gdpr_plus_standard_footer_html() {
-    global $CFG, $PAGE, $USER;
+    global $CFG, $PAGE;
 
     $message = null;
     if (!empty($CFG->sitepolicyhandler)

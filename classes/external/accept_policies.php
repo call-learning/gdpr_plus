@@ -69,7 +69,7 @@ class accept_policies extends external_api {
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
      */
-    public static function execute($policies) {
+    public static function execute(array $policies) {
         global $USER;
         $warnings = [];
         $params = external_api::validate_parameters(self::execute_parameters(), [
@@ -80,8 +80,21 @@ class accept_policies extends external_api {
             $context = context_user::instance($USER->id);
             self::validate_context($context);
         }
-        utils::set_policies_acceptances($policies);
-        // TODO: Return necessary warnings.
+        $validpolicies = utils::get_only_existing_policies($policies);
+        utils::set_policies_acceptances($validpolicies);
+        if (count($validpolicies) != count($policies)) {
+            $invalidpolicies = array_diff_ukey($policies, $validpolicies, function($policy1, $policy2) {
+                return $policy1['policyid'] == $policy2['policyid'];
+            });
+            foreach ($invalidpolicies as $policy) {
+                $warnings[] = [
+                    'item' => 'policyid',
+                    'itemid' => $policy['policyid'],
+                    'warningcode' => 'invalidpolicyid',
+                    'message' => 'Invalid policy id'
+                ];
+            }
+        }
         return [
             'warnings' => $warnings
         ];

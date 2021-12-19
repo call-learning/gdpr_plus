@@ -69,7 +69,7 @@ class policies_consent implements renderable, templatable {
         $data->mandatorypolicies = [];
         $data->optionalpolicies = [];
         foreach ($policies as $policy) {
-            $policy->shortname =  preg_replace('/\s+/', '-', strtolower($policy->name));
+            $policy->shortname = preg_replace('/\s+/', '-', strtolower($policy->name));
             if ($policy->mandatory) {
                 $data->mandatorypolicies[] = $policy;
             } else {

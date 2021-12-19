@@ -24,14 +24,14 @@
 
 
 defined('MOODLE_INTERNAL') || die();
-$string['pluginname'] = 'GDPR Policies plus';
-$string['policiesconsent:label'] = 'If you want to continue browsing this website, you need to agree to some of our policies.';
-$string['policiesconsent:optionalagreement'] = 'Optional';
-$string['policiesconsent:mandatoryagreement'] = 'Mandatory';
-$string['policiesconsent:button:continue'] = 'Continue';
-$string['policiesconsent:button:showsettings'] = 'Show settings';
-$string['policiesconsent:button:rejectnonessential'] = 'Reject Non Essential';
-$string['policiesconsent:button:acceptall'] = 'Accept All';
-$string['policiesconsent:button:hidesettings'] = 'Hide settings';
-$string['policiesconsent:button:acceptselected'] = 'Save my choices';
-$string['policiesconsent:button:showbanner'] = 'Show Policies';
+$string['pluginname'] = 'RGPD plus';
+$string['policiesconsent:label'] = 'Si vous voulez continuez sur ce site, vous devez prendre connaissance et accepter certaines de nos politiques de confidentialité.';
+$string['policiesconsent:optionalagreement'] = 'Optionnel';
+$string['policiesconsent:mandatoryagreement'] = 'Obligatoire';
+$string['policiesconsent:button:continue'] = 'Continuer';
+$string['policiesconsent:button:showsettings'] = 'Voir paramètres';
+$string['policiesconsent:button:rejectnonessential'] = 'Rejeter les non-essentiels';
+$string['policiesconsent:button:acceptall'] = 'Tout accepter';
+$string['policiesconsent:button:hidesettings'] = 'Cacher';
+$string['policiesconsent:button:acceptselected'] = 'Sauvegarder mes choix';
+$string['policiesconsent:button:showbanner'] = 'Montrer';

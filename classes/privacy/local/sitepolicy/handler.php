@@ -18,7 +18,6 @@ namespace tool_gdpr_plus\privacy\local\sitepolicy;
 
 defined('MOODLE_INTERNAL') || die();
 
-use tool_gdpr_plus\external\accept_policies;
 use tool_gdpr_plus\utils;
 use tool_policy\api;
 use tool_policy\policy_version;

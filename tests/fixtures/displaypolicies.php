@@ -43,7 +43,6 @@ $policies = api::list_current_versions($policytype);
 $policies = utils::retrieve_policies_with_acceptance($policies);
 $policyagreed = utils::has_policy_been_agreed();
 
-/* @var core_renderer $OUTPUT */
 if (isloggedin()) {
     global $USER;
     echo $OUTPUT->box("User :" . fullname($USER));
@@ -53,7 +52,7 @@ echo $OUTPUT->box_start("Policies");
 if ($policies) {
     echo html_writer::alist(array_map(
         function($policy) {
-          return "$policy->name : " . ($policy->policyagreed ? 'yes' : 'no');
+            return "$policy->name : " . ($policy->policyagreed ? 'yes' : 'no');
         },
         $policies));
 }

@@ -37,9 +37,28 @@ class utils {
      */
     const SESSION_KEY_POLICIES_ACCEPTED = 'gprd_plus_policies_accepted';
 
-    public static function is_loggedin_no_guest() {
+    /**
+     * Helper to determine the current is logged in but not as guest.
+     *
+     * @return bool
+     */
+    public static function is_loggedin_no_guest(): bool {
         return isloggedin() && !isguestuser();
     }
+
+    /**
+     * Return a filtered set of existing policies id
+     *
+     * @param array $policies associative array with two items : policyid and other info
+     * @return array
+     */
+    public static function get_only_existing_policies(array $policies): array {
+        return array_filter($policies, function($policy) {
+            global $DB;
+            return $DB->record_exists('tool_policy_versions', ['id' => $policy['policyid']]);
+        });
+    }
+
     /**
      * Set policy acceptance from an array of definition
      *
@@ -47,7 +66,7 @@ class utils {
      *
      * @param array $policies associative array with two items : policyid and accepted
      */
-    public static function set_policies_acceptances(array $policies) {
+    public static function set_policies_acceptances(array $policies): void {
         if (static::is_loggedin_no_guest()) {
             foreach ($policies as $policy) {
                 $policiyid = $policy['policyid'];
@@ -70,9 +89,10 @@ class utils {
      *
      * Note this will store information in the current session if user not yet logged in.
      *
-     * @param array
+     * @param array $policies
+     * @return array
      */
-    public static function retrieve_policies_with_acceptance(array $policies) {
+    public static function retrieve_policies_with_acceptance(array $policies): array {
         global $USER;
         if (empty($policies)) {
             return [];
@@ -110,9 +130,9 @@ class utils {
     /**
      * Has policy been agreed
      *
-     * @return false|mixed
+     * @return bool
      */
-    public static function has_policy_been_agreed() {
+    public static function has_policy_been_agreed(): bool {
         global $USER;
         if (static::is_loggedin_no_guest()) {
             return $USER->policyagreed;
