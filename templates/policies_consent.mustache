@@ -17,7 +17,7 @@
 {{!
     @template tool_gdpr_plus/policy_consent
 
-    Template for the policy constne message (see tool policy)
+    Template for the policy consent message (see tool policy)
 
     Context variables required for this template:
     * pluginbaseurl
@@ -44,11 +44,12 @@
                 "name": "Terms &amp; conditions"
             }
         ]
-
     }
+
 }}
+
 <div class="policies-consent tool_gdpr_plus" id="gdpr-plus-{{uniqid}}">
-    <div class="policy-container bg-info text-light">
+    <div class="policy-container bg-dark text-light">
         <div class="banner p-2 d-flex flex-column text-center">
             <div class="description p-1">
                 {{# str }} policiesconsent:label, tool_gdpr_plus {{/ str }}
@@ -97,15 +98,15 @@
 {{#haspolicies}}
     {{#js}}
         require(['tool_gdpr_plus/policies-consent-manager', 'tool_policy/policyactions'], function(PoliciesConsentManager, Actions) {
-        // Get localised messages.
-        var continuemessage = "{{# str }} policiesconsent:button:continue, tool_gdpr_plus {{/ str }}";
-        // Do not display within in all H5P or other embedded iframes.
-        if (window.location === window.parent.location) {
-            const cc = new PoliciesConsentManager({
-                    containerId: "gdpr-plus-{{uniqid}}",
-                    policyAgreed: {{policyagreed}}
-                });
-        }
+            // Get localised messages.
+            var continuemessage = "{{# str }} policiesconsent:button:continue, tool_gdpr_plus {{/ str }}";
+            // Do not display within in all H5P or other embedded iframes.
+            if (window.location === window.parent.location) {
+                var cc = new PoliciesConsentManager({
+                        containerId: "gdpr-plus-{{uniqid}}",
+                        policyAgreed: {{policyagreed}}
+                    });
+            }
         });
     {{/js}}
 {{/haspolicies}}

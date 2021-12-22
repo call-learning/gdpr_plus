@@ -52,7 +52,7 @@ class accept_policies extends external_api {
             [
                 'policies' => new external_multiple_structure(
                     new external_single_structure([
-                        'policyid' => new external_value(PARAM_INT, 'The policy version ID', VALUE_REQUIRED),
+                        'policyversionid' => new external_value(PARAM_INT, 'The policy version ID', VALUE_REQUIRED),
                         'accepted' => new external_value(PARAM_BOOL, 'Policy accepted ?', VALUE_REQUIRED),
                     ])
                 )
@@ -78,20 +78,28 @@ class accept_policies extends external_api {
         $policies = $params['policies'];
         if (isloggedin()) {
             $context = context_user::instance($USER->id);
+            $agreed = $USER->policyagreed;
+            $USER->policyagreed = true; // To prevent policy check from being done here.
             self::validate_context($context);
+            $USER->policyagreed = $agreed;
         }
-        $validpolicies = utils::get_only_existing_policies($policies);
+        $validpolicies = [];
+        if (!empty($policies)) {
+            $validpolicies = self::filter_existing_version_acceptance(
+                $policies
+            );
+        }
         utils::set_policies_acceptances($validpolicies);
         if (count($validpolicies) != count($policies)) {
             $invalidpolicies = array_diff_ukey($policies, $validpolicies, function($policy1, $policy2) {
-                return $policy1['policyid'] == $policy2['policyid'];
+                return $policy1['policyversionid'] == $policy2['policyversionid'];
             });
             foreach ($invalidpolicies as $policy) {
                 $warnings[] = [
-                    'item' => 'policyid',
-                    'itemid' => $policy['policyid'],
-                    'warningcode' => 'invalidpolicyid',
-                    'message' => 'Invalid policy id'
+                    'item' => 'policyversionid',
+                    'itemid' => $policy['policyversionid'],
+                    'warningcode' => 'invalidpolicyversionid',
+                    'message' => 'Invalid policy version id'
                 ];
             }
         }
@@ -109,5 +117,18 @@ class accept_policies extends external_api {
         return new external_single_structure([
             'warnings' => new external_warnings()
         ]);
+    }
+
+    /**
+     * Return a filtered set of existing policies id
+     *
+     * @param array $versionacceptance associative array with policyversionid and accepted fields
+     * @return array
+     */
+    public static function filter_existing_version_acceptance(array $versionacceptance): array {
+        return array_filter($versionacceptance, function($policyversion) {
+            global $DB;
+            return $DB->record_exists('tool_policy_versions', ['id' => $policyversion['policyversionid']]);
+        });
     }
 }

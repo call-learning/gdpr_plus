@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Delete Entity template page
+ * Display policies
  *
  * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
@@ -28,6 +28,7 @@ use tool_policy\policy_version;
 
 require_once(__DIR__ . '/../../../../../config.php');
 global $CFG;
+require_login();
 // Only run through behat or if we are in debug mode.
 debugging() || defined('BEHAT_SITE_RUNNING') || die();
 

@@ -13,19 +13,29 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-require_once(__DIR__ . '/../../../../../lib/behat/behat_base.php');
 
 /**
- * Step definition for tool_gdpr_plus
+ * Generator for behat
  *
- * A copy of the original tool_policy behat step definition as it would only work if
- * set to tool_policy, except that we are now using tool_gdpr_plus
  * @package   tool_gdpr_plus
- * @category   test
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class behat_tool_gdpr_plus extends behat_base {
-
+class behat_tool_gdpr_plus_generator extends behat_generator_base {
+    /**
+     * Get all entities that can be create through this behat_generator
+     *
+     * @return array
+     */
+    protected function get_creatable_entities(): array {
+        return [
+            'gdpr_policies' => [
+                'singular' => 'gdpr_policy',
+                'datagenerator' => 'policy',
+                'required' => ['name'],
+                'switchids' => [],
+            ],
+        ];
+    }
 
 }

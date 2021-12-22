@@ -9,8 +9,8 @@ Feature: Viewing acceptances reports and accepting on behalf of other users
       | sitepolicyhandler | tool_gdpr_plus |
     # This is required for now to prevent the overflow region affecting the action menus.
     And I change window size to "large"
-    And the following gdpr policies exist:
-      | Name                | Revision | Content    | Summary     | Status | Optional |
+    And the following "tool_gdpr_plus > gdpr_policies" exist:
+      | name                | revision | content    | summary     | status | optional |
       | This site policy    |          | full text2 | short text2 | active | 0        |
       | This cookies policy |          | full text3 | short text3 | active | 1        |
     And the following "users" exist:

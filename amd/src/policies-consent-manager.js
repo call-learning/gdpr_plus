@@ -83,7 +83,7 @@ export default class PoliciesConsentManager {
         const policyAcceptance = [];
         this.container.querySelectorAll(POLICY_CHECKBOXES_SELECTOR).forEach(
             (policyElement) => {
-                const policyKey = policyElement.dataset.id;
+                const policyVersionKey = policyElement.dataset.id;
                 const mandatoryPolicy = (policyElement.dataset.mandatory === '1');
                 let accepted = mandatoryPolicy || policyElement.checked;
                 if (rejectNonMandatory && !mandatoryPolicy) {
@@ -91,7 +91,7 @@ export default class PoliciesConsentManager {
                 }
                 accepted = accepted || forceAcceptance;
                 const acceptance = {
-                    'policyid': policyKey,
+                    'policyversionid': policyVersionKey,
                     'accepted': accepted
                 };
                 policyAcceptance.push(acceptance);

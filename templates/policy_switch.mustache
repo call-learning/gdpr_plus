@@ -25,7 +25,7 @@
     {
         "id": 1,
         "name": "Terms &amp; conditions"
-     }
+    }
 }}
 
 <li class="custom-control custom-switch">
@@ -35,7 +35,9 @@
         <a  class="text-dark" href="{{pluginbaseurl}}/view.php?versionid={{id}}{{#returnurl}}&amp;returnurl={{.}}{{/returnurl}}"
             data-action="view-guest"
             data-versionid="{{id}}"
-            data-behalfid="1" >
+            data-behalfid="1"
+            data-name="{{shortname}}"
+             >
             {{ name }}
         </a>
     </label>

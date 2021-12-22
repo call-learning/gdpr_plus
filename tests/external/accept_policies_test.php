@@ -46,7 +46,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Helper
      *
-     * @param ... $params
+     * @param ...$params
      * @return mixed
      */
     protected function accept_policies(...$params) {
@@ -54,12 +54,12 @@ class accept_policies_test extends \externallib_advanced_testcase {
         return external_api::clean_returnvalue(accept_policies::execute_returns(), $acceptpolicies);
     }
 
-    /***
+    /**
      * Accept no policies
      *
      * @return void
      */
-    public function test_accept_nopolicies() {
+    public function test_accept_no_policies() {
         $result = $this->accept_policies([]);
         $this->assertNotEmpty($result);
         $this->assertEmpty($result['warnings']);
@@ -72,7 +72,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
      */
     public function test_accept_wrong_parameters() {
         $this->expectException('invalid_parameter_exception');
-        $this->accept_policies(['policies' => ['policyid' => 9999]]);
+        $this->accept_policies(['policies' => ['policyversionid' => 9999]]);
     }
 
     /**
@@ -81,14 +81,14 @@ class accept_policies_test extends \externallib_advanced_testcase {
      * @return void
      */
     public function test_accept_non_existing() {
-        $result = $this->accept_policies(['policies' => ['policyid' => 9999, 'accepted' => true]]);
+        $result = $this->accept_policies(['policies' => ['policyversionid' => 9999, 'accepted' => true]]);
         $this->assertNotEmpty($result);
         $this->assertNotEmpty($result['warnings']);
         $this->assertEquals([
-            'item' => 'policyid',
+            'item' => 'policyversionid',
             'itemid' => 9999,
-            'warningcode' => 'invalidpolicyid',
-            'message' => 'Invalid policy id',
+            'warningcode' => 'invalidpolicyversionid',
+            'message' => 'Invalid policy version id',
         ], $result['warnings'][0]);
     }
 
@@ -98,14 +98,36 @@ class accept_policies_test extends \externallib_advanced_testcase {
      * @return void
      */
     public function test_accept_non_logged_in() {
-        $result = $this->accept_policies(['policies' => ['policyid' => 9999, 'accepted' => true]]);
+        $result = $this->accept_policies(['policies' => ['policyversionid' => 9999, 'accepted' => true]]);
         $this->assertNotEmpty($result);
         $this->assertNotEmpty($result['warnings']);
         $this->assertEquals([
-            'item' => 'policyid',
+            'item' => 'policyversionid',
             'itemid' => 9999,
-            'warningcode' => 'invalidpolicyid',
-            'message' => 'Invalid policy id',
+            'warningcode' => 'invalidpolicyversionid',
+            'message' => 'Invalid policy version id',
         ], $result['warnings'][0]);
     }
+
+    /**
+     * Test helper function
+     *
+     * @return void
+     */
+    public function test_get_only_existing_policies() {
+        $generator = $this->getDataGenerator()->get_plugin_generator('tool_gdpr_plus');
+        $policyversion = $generator->create_policy((object) [
+            'name' => 'This cookies policy',
+            'content' => 'full text3',
+            'summary' => 'short text3',
+            'status' => 'active',
+            'optional' => '1',
+            'audience' => 'all'
+        ])->to_record();
+
+        $this->assertEmpty(accept_policies::filter_existing_version_acceptance([['policyversionid' => 9999, 'accepted' => true]]));
+        $expectedversion = [['policyversionid' => $policyversion->id, 'accepted' => true]];
+        $this->assertEquals($expectedversion, accept_policies::filter_existing_version_acceptance($expectedversion));
+    }
+
 }
