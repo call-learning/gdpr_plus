@@ -43,6 +43,12 @@ function tool_gdpr_plus_standard_footer_html() {
         try {
             $page = new \tool_gdpr_plus\output\policies_consent();
             $message = $output->render($page);
+            $policies = api::get_current_versions_ids();
+            if (!empty($policies)) {
+                $url = new moodle_url('/admin/tool/policy/viewall.php', ['returnurl' => $PAGE->url]);
+                $output = html_writer::link($url, get_string('userpolicysettings', 'tool_policy'));
+                $message .= html_writer::div($output, 'policiesfooter');
+            }
         } catch (dml_read_exception $e) {
             // During upgrades, the new plugin code with new SQL could be in place but the DB not upgraded yet.
             $message = null;
@@ -69,7 +75,7 @@ function tool_gdpr_plus_pre_signup_requests() {
         cache::make('core', 'presignup')->delete('tool_policy_userpolicyagreed');
         // Redirect to "Policy" pages for consenting before creating the user.
         cache::make('core', 'presignup')->set('tool_policy_issignup', 1);
-        redirect(new \moodle_url('/admin/tool/policy/index.php'));
+        redirect(new \moodle_url('/admin/tool/gdpr_plus/index.php'));
     }
 }
 

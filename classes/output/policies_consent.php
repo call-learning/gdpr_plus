@@ -46,8 +46,8 @@ class policies_consent implements renderable, templatable {
         global $PAGE;
 
         $data = (object) [];
-        $data->pluginbaseurl = (new moodle_url('/admin/tool/policy'))->out(true);
-        if (strpos(qualified_me(), '/tool/policy/view.php') === false) {
+        $data->pluginbaseurl = (new moodle_url('/admin/tool/gdpr_plus'))->out(true);
+        if (strpos(qualified_me(), '/tool/gdpr_plus/view.php') === false) {
             // Current page is not a policy doc, so returnurl parameter will be it.
             $data->returnurl = qualified_me();
         } else {

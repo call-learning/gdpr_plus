@@ -44,3 +44,5 @@ Notes
 --
 
 I hope at some point this plugin will ultimately be integrated natively within Moodle core (and maybe merged with current tool policy features).
+There was an issue in tool_policy preventing users from accepting policies that are not mandatory as a guest. This has been resolved temporarily by duplicating the 
+view.php, index.php and relevant renderer. A ticket will be opened on this topic and the code will hopefully move there.

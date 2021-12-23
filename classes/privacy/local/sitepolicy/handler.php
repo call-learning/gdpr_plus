@@ -43,7 +43,7 @@ class handler extends \core_privacy\local\sitepolicy\handler {
     public static function get_redirect_url($forguests = false) {
         // There is no redirect for guests, policies are shown in the popup, only return redirect url for the logged in users.
         if (!$forguests && api::get_current_versions_ids(policy_version::AUDIENCE_LOGGEDIN)) {
-            return new \moodle_url('/admin/tool/policy/index.php');
+            return new \moodle_url('/admin/tool/gdpr_plus/index.php');
         }
         return null;
     }

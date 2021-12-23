@@ -37,7 +37,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
         set_config('sitepolicyhandler', 'tool_gdpr_plus');
@@ -46,7 +46,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Helper
      *
-     * @param ...$params
+     * @param ... $params
      * @return mixed
      */
     protected function accept_policies(...$params) {

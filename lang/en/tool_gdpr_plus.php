@@ -34,4 +34,4 @@ $string['policiesconsent:button:rejectnonessential'] = 'Reject Non Essential';
 $string['policiesconsent:button:acceptall'] = 'Accept All';
 $string['policiesconsent:button:hidesettings'] = 'Hide settings';
 $string['policiesconsent:button:acceptselected'] = 'Save my choices';
-$string['policiesconsent:button:showbanner'] = 'Show Policies';
+$string['policiesconsent:button:showbanner'] = 'Show Policies Banner';

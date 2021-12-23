@@ -66,7 +66,7 @@ Feature: Accepting and reviewing acceptance later through the banner
     When I reload the page
     Then I should not see "If you want to continue browsing this website, you need to agree to some of our policies"
     # A link but with button role
-    When I click on "Show Policies" "button"
+    When I click on "Show Policies Banner" "button"
     And I should see "If you want to continue browsing this website, you need to agree to some of our policies."
     Then I click on "Show settings" "button"
     Then I <sitepolicysee> "This site policy"
@@ -95,7 +95,7 @@ Feature: Accepting and reviewing acceptance later through the banner
     And I am on site homepage
     And I should not see "If you want to continue browsing this website, you need to agree to some of our policies."
     # A link but with button role
-    When I click on "Show Policies" "button"
+    When I click on "Show Policies Banner" "button"
     And I should see "If you want to continue browsing this website, you need to agree to some of our policies."
     Then I click on "Show settings" "button"
     Then I should see "This site policy"
@@ -110,7 +110,7 @@ Feature: Accepting and reviewing acceptance later through the banner
     And I log in as "user1"
     And I am on site homepage
     And I should not see "If you want to continue browsing this website, you need to agree to some of our policies."
-    When I click on "Show Policies" "button"
+    When I click on "Show Policies Banner" "button"
     And I should see "If you want to continue browsing this website, you need to agree to some of our policies."
     Then I click on "Show settings" "button"
     And "input[name=\"this-cookies-policy\"][checked]" "css_element" should exist
@@ -118,6 +118,6 @@ Feature: Accepting and reviewing acceptance later through the banner
     Then I click on "Save my choices" "button"
     Then I log out
     And I log in as "user1"
-    When I click on "Show Policies" "button"
+    When I click on "Show Policies Banner" "button"
     Then I click on "Show settings" "button"
     And "input[name=\"this-cookies-policy\"][checked]" "css_element" should not exist

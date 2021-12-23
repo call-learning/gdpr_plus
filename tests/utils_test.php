@@ -68,7 +68,7 @@ class utils_test extends \advanced_testcase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void {
         $this->resetAfterTest();
         $generator = $this->getDataGenerator()->get_plugin_generator('tool_gdpr_plus');
         $this->policyversions = [];
