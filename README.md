@@ -1,7 +1,8 @@
 GDPR Plus : enhanced tool policies
 --
 
-[![Build Status](https://travis-ci.org/call-learning/moodle-tool_gdpr_plus.svg?branch=master)](https://travis-ci.org/call-learning/moodle-tool_gdpr_plus)
+[![CI Tests (Linting)](https://github.com/call-learning/moodle-tool_gdpr_plus/actions/workflows/lint.yml/badge.svg)](https://github.com/call-learning/moodle-tool_gdpr_plus/actions/workflows/lint.yml)
+[![CI Tests (Testing)](https://github.com/call-learning/moodle-tool_gdpr_plus/actions/workflows/ci.yml/badge.svg)](https://github.com/call-learning/moodle-tool_gdpr_plus/actions/workflows/ci.yml)
 
 The aim of this plugin is to enhance the tool_policy plugin on the specific issue of user acceptation of the policy through the "cookie" banner.
 
