@@ -53,9 +53,35 @@ echo $OUTPUT->box_start("Policies");
 if ($policies) {
     echo html_writer::alist(array_map(
         function($policy) {
-            return "$policy->name : " . ($policy->policyagreed ? 'yes' : 'no');
+            $content = "$policy->name: ";
+            $content .= html_writer::span($policy->policyagreed ? 'yes' : 'no', '',
+                ['id' => 'policy-' . $policy->id]);
+            return html_writer::span($content);
         },
         $policies));
 }
+$elementid = 'showpoliciestriggercontent';
+$PAGE->requires->js_init_code("
+const eventDisplay = (origin) => (event) => {
+            const policies = event.detail;
+            const displayEl = document.getElementById('$elementid');
+            displayEl.innerHTML = '';
+            displayEl.appendChild(document.createTextNode('Event triggered'));
+            if (policies) {
+                policies.forEach((p) => {
+                    const policyElement = document.getElementById('policy-' + p.policyversionid);
+                    policyElement.innerHTML = '';
+                    policyElement.appendChild(document.createTextNode(p.accepted ? 'yes (' + origin + ')':'no (' + origin + ')'));
+                });
+            }
+};
+document.addEventListener('grpd_policies_current_status',
+        eventDisplay('current_status')
+);
+document.addEventListener('grpd_policies_accepted',
+        eventDisplay('policies_accepted')
+);
+");
 echo $OUTPUT->box_end();
+echo $OUTPUT->box('', '', $elementid);
 echo $OUTPUT->footer();

@@ -58,6 +58,7 @@ export default class PoliciesConsentManager {
         }
         const showpopup = this.container.querySelector(".show-popup");
         showpopup.addEventListener("click", this.open.bind(this));
+        this.triggerCurrentPolicyStatus();
     }
 
     open() {
@@ -72,13 +73,13 @@ export default class PoliciesConsentManager {
         super.emit(event, this);
     }
 
-    emitConsentChanged() {
-        this.emit("user_cookie_consent_changed", {
-            'consent': this._cookie.status,
-            'acceptedCategories': this._cookie.acceptedCategories
-        });
+    triggerCurrentPolicyStatus() {
+        const policiesAcceptances = this.__getPoliciesAcceptance(false, false);
+        const eventname = "grpd_policies_current_status";
+        document.dispatchEvent(new CustomEvent(eventname, {
+            detail: policiesAcceptances
+        }));
     }
-
     __getPoliciesAcceptance(rejectNonMandatory, forceAcceptance) {
         const policyAcceptance = [];
         this.container.querySelectorAll(POLICY_CHECKBOXES_SELECTOR).forEach(
@@ -118,9 +119,10 @@ export default class PoliciesConsentManager {
     __acceptPolicies(policiesAcceptances) {
         const eventname = "grpd_policies_accepted";
         this.__setRemotePolicyAcceptance(policiesAcceptances);
-        document.dispatchEvent(new Event(eventname), policiesAcceptances);
+        document.dispatchEvent(new CustomEvent(eventname, {
+            detail: policiesAcceptances
+        }));
         this.__resetPolicyUI(policiesAcceptances);
-        //PolicyStorage.set(POLICY_ACCEPTED_KEY, true);
         this.close();
     }
 

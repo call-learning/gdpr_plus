@@ -110,12 +110,13 @@ class utils {
         if (static::is_loggedin_no_guest()) {
             $acceptances = api::get_user_acceptances($USER->id);
             foreach ($policiescurrentversions as $policyversion) {
+                $policyversion->policyagreed = false;
                 if (!empty($acceptances[$policyversion->id])) {
                     $policyversion->policyagreed = $acceptances[$policyversion->id]->status == "1";
                 }
                 $policyversion->mandatory = !($policyversion->optional == "1");
                 if ($policyversion->mandatory) {
-                    $policyversion->policyagreed = 1;
+                    $policyversion->policyagreed = true;
                 }
             }
         } else {

@@ -33,6 +33,8 @@ Note that the way we designed it was to rely on policies acceptance and not "coo
 Once a policy has been accepted, it will send javascript "grpd_policies_accepted" message with the list of policies (policy version id) and acceptance status.
 It is then up to the theme developer to enable the related javascript (for example Google Analytics) depending on which policy has been accepted.
 
+Additionnaly, on page load, the current status of the policies is sent via another event 'grpd_policies_current_status'.
+
 Features
 --
 
