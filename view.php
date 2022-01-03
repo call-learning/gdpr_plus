@@ -27,8 +27,10 @@
  *  manage=<bool> View the policy as a part of the management UI (managedocs.php).
  *
  * @package   tool_gdpr_plus
- * @copyright   2018 Sara Arjona (sara@moodle.com)
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
+ * @copyright based on work by 2018 Sara Arjona (sara@moodle.com)
+ *
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use tool_gdpr_plus\output\page_viewdoc;

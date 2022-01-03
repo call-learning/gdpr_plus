@@ -25,7 +25,8 @@
  *  behalfid=<id> The user id to view the policy version as (such as child's id).
  *
  * @package   tool_gdpr_plus
- * @copyright   2018 Sara Arjona (sara@moodle.com)
+ * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
+ * @copyright based on work by 2018 Sara Arjona (sara@moodle.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
