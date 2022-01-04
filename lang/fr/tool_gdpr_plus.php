@@ -34,4 +34,4 @@ $string['policiesconsent:button:rejectnonessential'] = 'Rejeter les non-essentie
 $string['policiesconsent:button:acceptall'] = 'Tout accepter';
 $string['policiesconsent:button:hidesettings'] = 'Cacher';
 $string['policiesconsent:button:acceptselected'] = 'Sauvegarder mes choix';
-$string['policiesconsent:button:showbanner'] = 'Bannière des politiques';
+$string['policiesconsent:button:showbanner'] = 'Mon acceptation des politiques de données';
