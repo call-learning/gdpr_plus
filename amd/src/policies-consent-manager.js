@@ -21,7 +21,6 @@
  *
  * @module    tool_gdpr_plus/src/policies-consent-manager
  * @class     PoliciesConsentManager
- * @package   tool_gdpr_plus
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -66,7 +65,11 @@ export default class PoliciesConsentManager {
     }
 
     close() {
-        this.container.querySelector('.policy-container').classList.remove("displayed");
+        this.container.querySelector('.policy-container').classList.add("removing");
+        setTimeout(() => {
+            this.container.querySelector('.policy-container').classList.remove("displayed");
+            this.container.querySelector('.policy-container').classList.remove("removing");
+        }, 500);
     }
 
     emit(event) {
