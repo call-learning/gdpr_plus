@@ -13,7 +13,11 @@
 
 .tool_gdpr_plus.policies-consent .policy-container.displayed {
     opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    visibility: visible;
+}
+
+.tool_gdpr_plus.policies-consent .policy-container.removing {
+    opacity: 0;
     visibility: visible;
 }
 
