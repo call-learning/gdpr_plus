@@ -25,14 +25,14 @@ Feature: Viewing acceptances reports and accepting on behalf of other users
       | fullname | shortname |
       | Course1  | C1        |
     And the following "course enrolments" exist:
-      | user     | course | role    |
-      | user1    | C1     | student |
-      | user2    | C1     | student |
+      | user    | course | role    |
+      | user1   | C1     | student |
+      | user2   | C1     | student |
 
   Scenario: View acceptances made by users on their own, single policy
     When I log in as "user1"
     Then I should see "This site policy"
-    And I should not see "Course overview"
+    And I should not see "Calendar"
     And I should see "This site policy"
     And I press "Next"
     And I should see "This cookies policy"
@@ -40,7 +40,7 @@ Feature: Viewing acceptances reports and accepting on behalf of other users
     And I set the field "I agree to the This site policy" to "1"
     And I set the field "I agree to the This cookies policy" to "1"
     And I press "Next"
-    And I should see "Course overview"
+    And I should see "Calendar"
     And I log out
     And I log in as "manager"
     And I should see "This site policy"

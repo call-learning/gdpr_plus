@@ -51,7 +51,7 @@ class tool_gdpr_plus_generator extends component_generator_base {
         $data = (object) [
             'audience' => \tool_policy\policy_version::AUDIENCE_ALL,
             'archived' => 0,
-            'type' => 0
+            'type' => 0,
         ];
         $elementdata = array_change_key_case($elementdata, CASE_LOWER);
         foreach ($elementdata as $key => $value) {

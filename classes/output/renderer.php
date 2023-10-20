@@ -13,12 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 namespace tool_gdpr_plus\output;
 
 use plugin_renderer_base;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Main renderer

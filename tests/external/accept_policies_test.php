@@ -46,17 +46,19 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Helper
      *
-     * @param ... $params
+     * @param mixed ...$params parameters
      * @return mixed
+     * @covers \accept_policies::execute()
      */
     protected function accept_policies(...$params) {
-        $acceptpolicies = accept_policies::execute(... $params);
+        $acceptpolicies = accept_policies::execute(...$params);
         return external_api::clean_returnvalue(accept_policies::execute_returns(), $acceptpolicies);
     }
 
     /**
      * Accept no policies
      *
+     * @covers \accept_policies::execute()
      * @return void
      */
     public function test_accept_no_policies() {
@@ -68,6 +70,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Accept wrong parameters
      *
+     * @covers \accept_policies::execute()
      * @return void
      */
     public function test_accept_wrong_parameters() {
@@ -78,6 +81,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Accept non existing policy
      *
+     * @covers \accept_policies::execute()
      * @return void
      */
     public function test_accept_non_existing() {
@@ -95,6 +99,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Accept non existing policy
      *
+     * @covers \accept_policies::execute()
      * @return void
      */
     public function test_accept_non_logged_in() {
@@ -112,6 +117,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
     /**
      * Test helper function
      *
+     * @covers \accept_policies::execute()
      * @return void
      */
     public function test_get_only_existing_policies() {
@@ -122,7 +128,7 @@ class accept_policies_test extends \externallib_advanced_testcase {
             'summary' => 'short text3',
             'status' => 'active',
             'optional' => '1',
-            'audience' => 'all'
+            'audience' => 'all',
         ])->to_record();
 
         $this->assertEmpty(accept_policies::filter_existing_version_acceptance([['policyversionid' => 9999, 'accepted' => true]]));

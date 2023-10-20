@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * GDPR Plus tool policy
  *
@@ -22,12 +21,10 @@
  * @copyright based on work by 2018 David Mudrák <david@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 use core_user\output\myprofile\tree;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Load policy message for guests.

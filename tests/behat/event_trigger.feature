@@ -1,4 +1,4 @@
-@tool @tool_gdpr_plus
+@tool @tool_gdpr_plus @javascript
 Feature: Accepting and reviewing acceptance later through the banner
   As a user I can accept all policies, accept only mandatory policies and review my choice later.
 
@@ -10,7 +10,6 @@ Feature: Accepting and reviewing acceptance later through the banner
       | name                | revision | content    | summary     | status | optional | audience | agreementstyle |
       | This cookies policy |          | full text3 | short text3 | active | 1        | all      | 1              |
 
-  @javascript
   Scenario: A change in policy acceptance will trigger an event with the policies accepted
     Given I log in as "admin"
     And I visit "/admin/tool/gdpr_plus/tests/fixtures/displaypolicies.php"
@@ -22,13 +21,13 @@ Feature: Accepting and reviewing acceptance later through the banner
     Then I wait until the page is ready
     Then I should see "Event triggered"
     And I should see "This cookies policy: yes (policies_accepted)"
+    Then I wait until the page is ready
     Then I click on "Show Policies Banner" "button"
     Then I wait until the page is ready
     Then I click on "input[name=\"this-cookies-policy\"]" "css_element"
     Then I click on "Save my choices" "button"
     And I should see "This cookies policy: no (policies_accepted)"
 
-  @javascript
   Scenario: When policy is accepted it still send a message on page reload with current status
     Given I log in as "admin"
     And I visit "/admin/tool/gdpr_plus/tests/fixtures/displaypolicies.php"

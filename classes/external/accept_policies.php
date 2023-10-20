@@ -55,7 +55,7 @@ class accept_policies extends external_api {
                         'policyversionid' => new external_value(PARAM_INT, 'The policy version ID', VALUE_REQUIRED),
                         'accepted' => new external_value(PARAM_BOOL, 'Policy accepted ?', VALUE_REQUIRED),
                     ])
-                )
+                ),
             ]
         );
     }
@@ -99,12 +99,12 @@ class accept_policies extends external_api {
                     'item' => 'policyversionid',
                     'itemid' => $policy['policyversionid'],
                     'warningcode' => 'invalidpolicyversionid',
-                    'message' => 'Invalid policy version id'
+                    'message' => 'Invalid policy version id',
                 ];
             }
         }
         return [
-            'warnings' => $warnings
+            'warnings' => $warnings,
         ];
     }
 
@@ -115,7 +115,7 @@ class accept_policies extends external_api {
      */
     public static function execute_returns() {
         return new external_single_structure([
-            'warnings' => new external_warnings()
+            'warnings' => new external_warnings(),
         ]);
     }
 

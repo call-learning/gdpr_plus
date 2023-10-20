@@ -96,17 +96,17 @@
     </a>
 </div>
 {{#haspolicies}}
-    {{#js}}
-        require(['tool_gdpr_plus/policies-consent-manager', 'tool_policy/policyactions'], function(PoliciesConsentManager, Actions) {
-            // Get localised messages.
-            var continuemessage = "{{# str }} policiesconsent:button:continue, tool_gdpr_plus {{/ str }}";
-            // Do not display within in all H5P or other embedded iframes.
-            if (window.location === window.parent.location) {
-                var cc = new PoliciesConsentManager({
-                        containerId: "gdpr-plus-{{uniqid}}",
-                        policyAgreed: {{policyagreed}}
-                    });
-            }
-        });
-    {{/js}}
+{{#js}}
+    require(['tool_gdpr_plus/policies-consent-manager', 'tool_policy/policyactions'], function(PoliciesConsentManager, Actions) {
+        // Get localised messages.
+        var continuemessage = "{{# str }} policiesconsent:button:continue, tool_gdpr_plus {{/ str }}";
+        // Do not display within in all H5P or other embedded iframes.
+        if (window.location === window.parent.location) {
+            var cc = new PoliciesConsentManager({
+                    containerId: "gdpr-plus-{{uniqid}}",
+                    policyAgreed: {{policyagreed}}
+                });
+        }
+    });
+{{/js}}
 {{/haspolicies}}

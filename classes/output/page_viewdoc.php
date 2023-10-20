@@ -23,8 +23,6 @@ use stdClass;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
-
 
 /**
  * Represents a page for showing the given policy document version.
@@ -36,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright based on work by 2018 Sara Arjona <sara@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class page_viewdoc extends \tool_policy\output\page_viewdoc  {
+class page_viewdoc extends \tool_policy\output\page_viewdoc {
     /**
      * Sets up the global $PAGE and performs the access checks.
      */

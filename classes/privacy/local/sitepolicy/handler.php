@@ -13,10 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 namespace tool_gdpr_plus\privacy\local\sitepolicy;
-
-defined('MOODLE_INTERNAL') || die();
 
 use tool_gdpr_plus\utils;
 use tool_policy\api;
@@ -101,7 +98,7 @@ class handler extends \core_privacy\local\sitepolicy\handler {
         }
 
         // Mark policies as agreed.
-        $DB->set_field('user', 'policyagreed', 1, array('id' => $USER->id));
+        $DB->set_field('user', 'policyagreed', 1, ['id' => $USER->id]);
         $USER->policyagreed = 1;
 
         return true;

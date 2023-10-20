@@ -19,8 +19,6 @@ namespace tool_gdpr_plus;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Tests for the update_course class.
  *
@@ -43,7 +41,7 @@ class utils_test extends \advanced_testcase {
             'summary' => 'short text2',
             'status' => 'active',
             'optional' => '0',
-            'audience' => 'all'
+            'audience' => 'all',
         ],
         [
             'name' => 'This cookies policy',
@@ -51,7 +49,7 @@ class utils_test extends \advanced_testcase {
             'summary' => 'short text3',
             'status' => 'active',
             'optional' => '1',
-            'audience' => 'all'
+            'audience' => 'all',
         ],
         [
             'name' => 'This privacy policy',
@@ -59,7 +57,7 @@ class utils_test extends \advanced_testcase {
             'summary' => 'short text4',
             'status' => 'active',
             'optional' => '1',
-            'audience' => 'loggedin'
+            'audience' => 'loggedin',
         ],
     ];
 
@@ -81,6 +79,7 @@ class utils_test extends \advanced_testcase {
     /**
      * Test helper function
      *
+     * @covers \tool_gdpr_plus\utils::is_loggedin_no_guest
      * @return void
      */
     public function test_is_loggedin_no_guest() {
@@ -97,6 +96,7 @@ class utils_test extends \advanced_testcase {
      *
      * @param string $accept
      *
+     * @covers \tool_gdpr_plus\utils::set_policies_acceptances
      * @dataProvider data_generator_policy_acceptance
      */
     public function test_set_policies_acceptances_guest($accept) {
@@ -118,6 +118,7 @@ class utils_test extends \advanced_testcase {
      * @param string $accept
      * @param bool $agreed
      *
+     * @covers \tool_gdpr_plus\utils::set_policies_acceptances
      * @dataProvider data_generator_policy_acceptance
      */
     public function test_set_policies_acceptances_user($accept, $agreed) {
@@ -136,6 +137,7 @@ class utils_test extends \advanced_testcase {
      *
      * @param string $accept
      *
+     * @covers \tool_gdpr_plus\utils::set_policies_acceptances
      * @dataProvider data_generator_policy_acceptance
      */
     public function test_set_policies_acceptances_user_switch($accept) {
@@ -161,7 +163,7 @@ class utils_test extends \advanced_testcase {
      *
      * @return array[]
      */
-    public function data_generator_policy_acceptance() {
+    public static function data_generator_policy_acceptance(): array {
         return [
             'accept none' => ['accept' => 'none', 'agreed' => false],
             'accept all' => ['accept' => 'all', 'agreed' => true],
@@ -208,6 +210,7 @@ class utils_test extends \advanced_testcase {
     /**
      * Test helper function
      *
+     * @covers \tool_gdpr_plus\utils::retrieve_policies_with_acceptance
      * @return void
      */
     public function test_retrieve_policies_with_acceptance_guest() {
@@ -226,6 +229,7 @@ class utils_test extends \advanced_testcase {
     /**
      * Test helper function
      *
+     * @covers \tool_gdpr_plus\utils::retrieve_policies_with_acceptance
      * @return void
      */
     public function test_retrieve_policies_with_acceptance_user() {
@@ -248,6 +252,7 @@ class utils_test extends \advanced_testcase {
      * @param string $accept
      * @param bool $agreed
      *
+     * @covers \tool_gdpr_plus\utils::has_policy_been_agreed
      * @dataProvider data_generator_policy_acceptance
      */
     public function test_has_policy_been_agreed_guest($accept, $agreed) {
@@ -264,6 +269,7 @@ class utils_test extends \advanced_testcase {
      * @param string $accept
      * @param bool $agreed
      *
+     * @covers \tool_gdpr_plus\utils::has_policy_been_agreed
      * @dataProvider data_generator_policy_acceptance
      */
     public function test_has_policy_been_agreed_user($accept, $agreed) {
@@ -281,6 +287,7 @@ class utils_test extends \advanced_testcase {
      * @param string $accept
      * @param bool $agreed
      *
+     * @covers \tool_gdpr_plus\utils::has_policy_been_agreed
      * @dataProvider data_generator_policy_acceptance
      */
     public function test_has_policy_been_agreed_switch($accept, $agreed) {

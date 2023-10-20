@@ -13,10 +13,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 namespace tool_gdpr_plus\output;
 
-defined('MOODLE_INTERNAL') || die();
 
 use cache;
 use context_system;
