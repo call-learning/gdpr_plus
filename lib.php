@@ -25,37 +25,6 @@ use core_user\output\myprofile\tree;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-
-/**
- * Load policy message for guests.
- *
- * @return string The HTML code to insert before the head.
- */
-function tool_gdpr_plus_standard_footer_html() {
-    global $CFG, $PAGE;
-
-    $message = null;
-    if (!empty($CFG->sitepolicyhandler)
-        && $CFG->sitepolicyhandler == 'tool_gdpr_plus') {
-        $output = $PAGE->get_renderer('tool_gdpr_plus');
-        try {
-            $page = new \tool_gdpr_plus\output\policies_consent();
-            $message = $output->render($page);
-            $policies = api::get_current_versions_ids();
-            if (!empty($policies)) {
-                $url = new moodle_url('/admin/tool/policy/viewall.php', ['returnurl' => $PAGE->url]);
-                $output = html_writer::link($url, get_string('userpolicysettings', 'tool_policy'));
-                $message .= html_writer::div($output, 'policiesfooter');
-            }
-        } catch (dml_read_exception $e) {
-            // During upgrades, the new plugin code with new SQL could be in place but the DB not upgraded yet.
-            $message = null;
-        }
-    }
-
-    return $message;
-}
-
 /**
  * Hooks redirection to policy acceptance pages before sign up.
  */
