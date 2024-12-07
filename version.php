@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tool_gdpr_plus';
-$plugin->version = 2021102603;
-$plugin->release = 'v0.1';
+$plugin->version = 2024120700;
+$plugin->release = 'v1.0';
 $plugin->requires = 2019111800;
 $plugin->maturity = MATURITY_STABLE;

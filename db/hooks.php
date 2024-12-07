@@ -26,8 +26,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $callbacks = [
     [
-        'hook' => \core\hook\output\before_footer_html_generation::class,
-        'callback' => \tool_gdpr_plus\hook_callbacks::class . '::before_footer_html_generation',
+        'hook' => \core\hook\output\before_standard_footer_html_generation::class,
+        'callback' => \tool_gdpr_plus\hook_callbacks::class . '::before_standard_footer_html_generation',
         'priority' => 0,
     ],
 ];

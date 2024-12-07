@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 namespace tool_gdpr_plus;
 
-use core\hook\output\before_footer_html_generation;
+use core\hook\output\before_standard_footer_html_generation;
 use dml_read_exception;
 use html_writer;
 use moodle_url;
@@ -31,12 +31,12 @@ use tool_policy\api;
 class hook_callbacks {
     /**
      * Load policy message for guests.
-     * @param before_footer_html_generation $hook
+     * @param before_standard_footer_html_generation $hook
      *
      * @return string The HTML code to insert before the head.
      *
      */
-    public static function before_footer_html_generation(before_footer_html_generation $hook): void {
+    public static function before_standard_footer_html_generation(before_standard_footer_html_generation $hook): void {
         global $CFG, $PAGE;
 
         $message = null;
